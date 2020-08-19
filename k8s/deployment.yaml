@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: nginx
-        image: bitnami/nginx:1.18
+        image: bitnami/nginx:1.17
         ports:
         - containerPort: 8080
         volumeMounts:
