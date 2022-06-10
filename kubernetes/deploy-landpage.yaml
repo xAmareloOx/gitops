@@ -27,7 +27,7 @@ spec:
         runAsGroup: 1001
         fsGroup: 1001
       containers:
-      - image: quay.io/bitnami/nginx:1.21
+      - image: bitnami/nginx:1.21
         resources:
           requests:
             cpu: 25m
