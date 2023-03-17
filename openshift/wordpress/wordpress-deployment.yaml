@@ -1,0 +1,61 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: wordpress
+  annotations:
+    app.openshift.io/connects-to: '[{"apiVersion":"apps/v1","kind":"StatefulSet","name":"wordpress-mysql"}]'
+  labels:
+    app: wordpress
+    app.kubernetes.io/part-of: wordpress
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: wordpress
+      tier: frontend
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: wordpress
+        tier: frontend
+    spec:
+      containers:
+      - image: bitnami/wordpress:6
+        name: wordpress
+        env:
+        - name: WORDPRESS_DATABASE_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: mysql-pass
+              key: password
+        - name: WORDPRESS_DATABASE_USER
+          valueFrom:
+            configMapKeyRef:
+              name: mysql-param
+              key: username
+        - name: WORDPRESS_DATABASE_NAME
+          valueFrom:
+            configMapKeyRef:
+              name: mysql-param
+              key: database
+        - name: WORDPRESS_DATABASE_HOST
+          valueFrom:
+            configMapKeyRef:
+              name: mysql-param
+              key: hostname
+        envFrom:
+        - configMapRef:
+            name: wordpress-param
+        - secretRef:
+            name: wordpress-pass
+        ports:
+        - containerPort: 80
+          name: wordpress
+        volumeMounts:
+        - mountPath: /var/www/html
+          name: html
+      volumes:
+      - name: html
+        emptyDir: {}

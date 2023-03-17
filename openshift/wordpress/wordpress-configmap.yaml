@@ -1,0 +1,9 @@
+apiVersion: v1
+data:
+  WORDPRESS_USERNAME: admin
+  WORDPRESS_BLOG_NAME: Paulo Vigne
+kind: ConfigMap
+metadata:
+  name: wordpress-param
+  labels:
+    app: wordpress
