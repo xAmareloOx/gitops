@@ -8,7 +8,7 @@ metadata:
     app: wordpress
     app.kubernetes.io/part-of: wordpress
 spec:
-  replicas: 7
+  replicas: 3
   selector:
     matchLabels:
       app: wordpress
