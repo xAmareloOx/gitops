@@ -4,7 +4,7 @@ metadata:
   name: goapp
 spec:
   rules:
-  - host: goapp.3.230.147.16.sslip.io
+  - host: goapp.3.239.219.57.sslip.io
     http:
       paths:
       - backend:
