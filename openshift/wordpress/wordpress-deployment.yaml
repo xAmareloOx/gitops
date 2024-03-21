@@ -51,7 +51,7 @@ spec:
         - secretRef:
             name: wordpress-pass
         ports:
-        - containerPort: 80
+        - containerPort: 8080
           name: wordpress
         volumeMounts:
         - mountPath: /var/www/html
